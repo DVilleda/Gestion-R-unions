@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!-- was: <?xml version="1.0" encoding="UTF-8"?> -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+       http://www.springframework.org/schema/mvc
+       http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+    
+    <mvc:annotation-driven />
+    
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>  
+    <bean id="ds" class="org.springframework.jdbc.datasource.DriverManagerDataSource">  
+        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />  
+        <property name="url" value="jdbc:mysql://localhost/gestion?serverTimezone=EST" />  
+        <property name="username" value="root" />  
+        <property name="password" value="root" />  
+    </bean>   
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">  
+        <property name="dataSource" ref="ds"></property>  
+    </bean>
+    <!-- 
+        Beans des dao
+    -->
+    <bean id="comptedao" class="com.dvilleda.dao.CompteDAO">  
+        <property name="jdbcTemplate" ref="jdbcTemplate"></property>  
+    </bean>
+    <bean id="contenudao" class="com.dvilleda.dao.ContenuDAO">  
+        <property name="jdbcTemplate" ref="jdbcTemplate"></property>  
+    </bean>
+    <bean id="dossierdao" class="com.dvilleda.dao.DossierDAO">  
+        <property name="jdbcTemplate" ref="jdbcTemplate"></property>  
+    </bean>
+    <bean id="pointdao" class="com.dvilleda.dao.PointDAO">  
+        <property name="jdbcTemplate" ref="jdbcTemplate"></property>  
+    </bean>
+    <bean id="reuniondao" class="com.dvilleda.dao.ReunionDAO">  
+        <property name="jdbcTemplate" ref="jdbcTemplate"></property>  
+    </bean>
+    <bean id="comptereuniondao" class="com.dvilleda.dao.CompteReunionDAO">  
+        <property name="jdbcTemplate" ref="jdbcTemplate"></property>  
+    </bean>
+    <!-- 
+        Beans des services avec dao
+    -->
+    <bean name="compteService" class="com.dvilleda.services.CompteService">
+        <property name="dao" ref="comptedao"> </property>
+    </bean>
+    <bean name="contenuService" class="com.dvilleda.services.ContenuService">
+        <property name="dao" ref="contenudao"></property>
+    </bean> 
+    <bean name="dossierService" class="com.dvilleda.services.DossierService">
+        <property name="dao" ref="dossierdao"></property>
+    </bean> 
+    <bean name="pointService" class="com.dvilleda.services.PointService">
+        <property name="dao" ref="pointdao"></property>
+    </bean> 
+    <bean name="reunionService" class="com.dvilleda.services.ReunionService">
+        <property name="dao" ref="reuniondao"></property>
+        <property name="compte_reunion_dao" ref="comptereuniondao"></property>
+    </bean>
+</beans>

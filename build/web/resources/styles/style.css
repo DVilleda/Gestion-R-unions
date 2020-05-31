@@ -1,0 +1,38 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 2018-10-15, 21:51:33
+    Author     : AToudeft
+*/
+.jumbotron {
+    background-color: #f99;
+    color : blue;
+    text-align: center;
+    font-weight: bold;
+    text-transform: capitalize;
+}
+.erreur {
+    color : red;
+}
+.resultat {
+    border: double #fcc 4px;
+    background-color: #fdd;
+    margin: 20px 0 0px 150px;
+    padding: 20px;
+    color: blue;
+    font-weight: bold;
+}
+img {
+    width: 16.66%;
+}
+form {
+    border: 1px solid lightgray;
+    padding: 50px 0px 60px 50px;
+    background-color: #fee;
+}
+input, select {
+    border-radius: 0 !important;
+}
